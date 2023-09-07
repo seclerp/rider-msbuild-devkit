@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <TargetFramework>net48</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NETCore.Platforms" />
+        <PackageReference Include="Microsoft.NETCore.Targets" />
+        <PackageReference Include="JetBrains.Platform.Core.Ide"/>
+        <PackageReference Include="JetBrains.Psi.Features.Core"/>
+        <PackageReference Include="JetBrains.Rider.RdBackend.Common"/>
+    </ItemGroup>
+
+</Project>

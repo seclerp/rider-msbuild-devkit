@@ -1,0 +1,20 @@
+name: Template Sync from Upstream
+permissions: write-all
+on:
+  schedule:
+    - cron: '0 8 * * *' # every day 8am
+  workflow_dispatch:
+
+jobs:
+  sync:
+    if: github.event.repository.name == 'rider-plugin-template'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: tgymnich/fork-sync@v1.8
+        with:
+          owner: JetBrains
+          repo: intellij-platform-plugin-template
+          base: main
+          head: main
+          pr_title: 🔀 Daily sync with `intellij-platform-plugin-template`
+          merge_method: rebase

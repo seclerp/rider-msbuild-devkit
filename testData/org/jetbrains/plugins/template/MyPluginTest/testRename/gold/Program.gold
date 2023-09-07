@@ -1,0 +1,17 @@
+namespace MyPluginTest;
+
+class Program
+{
+  public static void Main(string[] args)
+  {
+    var spaceShipName = "Millennium Falcon";
+    if (spaceShipName<caret> == args[0])
+    {
+      Console.WriteLine($"{spaceShipName} is authorized");
+    }
+    else
+    {
+      Console.WriteLine($"{spaceShipName} is not authorized");
+    }
+  }
+}
