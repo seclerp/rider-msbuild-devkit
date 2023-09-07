@@ -7,6 +7,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = "Rider Plugin Template"
+rootProject.name = "msbuild-runner"
 
 include("protocol")
