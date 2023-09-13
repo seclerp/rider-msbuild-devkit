@@ -10,9 +10,9 @@ import org.jetbrains.annotations.NonNls
 import java.io.File
 import java.nio.charset.Charset
 
-class MSBuildCommandBuilder(private val intellijProject: Project) {
-    private val activeRuntime by lazy { intellijProject.solution.dotNetActiveRuntimeModel.activeRuntime.valueOrNull }
-    protected val solutionDirectory = intellijProject.solutionDirectoryPath.toString()
+class MSBuildCommandBuilder(private val project: Project) {
+    private val activeRuntime by lazy { project.solution.dotNetActiveRuntimeModel.activeRuntime.valueOrNull }
+    protected val solutionDirectory = project.solutionDirectoryPath.toString()
 
     private fun getDotnetExePath() =
         activeRuntime?.dotNetCliExePath

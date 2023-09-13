@@ -36,7 +36,7 @@ class MSBuildRunConfiguration(
     }
 
     override fun getConfigurationEditor(): SettingsEditor<out RunConfiguration> {
-        return MSBuildSettingsEditor()
+        return MSBuildSettingsEditor(project)
     }
 }
 
