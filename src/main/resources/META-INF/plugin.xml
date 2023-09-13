@@ -12,6 +12,9 @@
         <toolWindow factoryClass="com.github.seclerp.msbuildrunner.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
         <configurationType
                 implementation="com.github.seclerp.msbuildrunner.MSBuildConfigurationType"/>
+        <applicationService serviceInterface="com.intellij.execution.impl.NewRunConfigurationTreePopupFactory"
+                            serviceImplementation="com.github.seclerp.msbuildrunner.runConfigurations.PatchedRiderNewRunConfigurationTreePopupFactory"
+                            overrides="true"/>
     </extensions>
 
     <applicationListeners>
