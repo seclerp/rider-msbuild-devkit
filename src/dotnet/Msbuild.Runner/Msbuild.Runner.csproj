@@ -14,4 +14,8 @@
         <PackageReference Include="JetBrains.Rider.RdBackend.Common"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <EmbeddedResource Include="FileTemplates\MSBuildTask.xml" />
+    </ItemGroup>
+
 </Project>
