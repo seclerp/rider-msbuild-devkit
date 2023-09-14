@@ -13,7 +13,7 @@
         <configurationType
                 implementation="com.github.seclerp.msbuildrunner.MSBuildConfigurationType"/>
         <applicationService serviceInterface="com.intellij.execution.impl.NewRunConfigurationTreePopupFactory"
-                            serviceImplementation="com.github.seclerp.msbuildrunner.runConfigurations.PatchedRiderNewRunConfigurationTreePopupFactory"
+                            serviceImplementation="com.github.seclerp.msbuildrunner.PatchedRiderNewRunConfigurationTreePopupFactory"
                             overrides="true"/>
     </extensions>
 

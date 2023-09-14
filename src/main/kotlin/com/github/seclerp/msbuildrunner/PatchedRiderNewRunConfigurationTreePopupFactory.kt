@@ -1,14 +1,11 @@
-package com.github.seclerp.msbuildrunner.runConfigurations
+package com.github.seclerp.msbuildrunner
 
-import com.github.seclerp.msbuildrunner.MSBuildConfigurationType
-import com.intellij.execution.configurations.ConfigurationType
+import com.intellij.execution.configurations.ConfigurationTypeUtil
 import com.intellij.execution.impl.DefaultNewRunConfigurationTreePopupFactory
 import com.intellij.ide.util.treeView.NodeDescriptor
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.Pair
-import com.jetbrains.rider.run.configurations.RiderNewRunConfigurationTreeGroupingProvider
 import com.jetbrains.rider.run.configurations.RiderNewRunConfigurationTreePopupFactory
-import icons.RiderIcons
 import javax.swing.Icon
 
 class PatchedRiderNewRunConfigurationTreePopupFactory : DefaultNewRunConfigurationTreePopupFactory() {
@@ -19,10 +16,8 @@ class PatchedRiderNewRunConfigurationTreePopupFactory : DefaultNewRunConfigurati
             nodeDescriptor is GroupDescriptor && nodeDescriptor.element == ".NET" -> {
                 buildList {
                     addAll(riderFactory.createChildElements(project, nodeDescriptor))
-                    val msbuildConfigType = ConfigurationType.CONFIGURATION_TYPE_EP.extensionList.firstOrNull { it.id == MSBuildConfigurationType.ID }
-                    if (msbuildConfigType != null) {
-                        add(createDescriptor(project, msbuildConfigType, nodeDescriptor))
-                    }
+                    val msbuildConfigType = ConfigurationTypeUtil.findConfigurationType(MSBuildConfigurationType::class.java)
+                    add(createDescriptor(project, msbuildConfigType, nodeDescriptor))
                 }.toTypedArray()
             }
             else -> riderFactory.createChildElements(project, nodeDescriptor)
