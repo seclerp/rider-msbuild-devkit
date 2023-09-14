@@ -15,7 +15,7 @@ job("Build and Test") {
             }
         }
     }
-    container(image = "seclerp/rider-plugin-ubuntu:0.20230324.203320") {
+    container(image = "seclerp/rider-plugin-ubuntu:latest") {
         kotlinScript { api ->
             api.gradlew("prepare", "--stacktrace")
             api.gradlew("check", "--stacktrace")
