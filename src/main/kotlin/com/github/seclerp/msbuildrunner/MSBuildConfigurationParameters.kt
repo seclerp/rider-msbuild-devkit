@@ -54,10 +54,17 @@ class MSBuildConfigurationParameters(
     override fun toDotNetExecutable(): DotNetExecutable {
         // TODO: Generate MSBuild executable
         val msbuildPath = project.solution.activeMsBuildPath.value ?: throw CantRunException("MSBuild isn't available")
+        val parameters = buildList {
+            add(projectFilePath)
+            add(buildString {
+                append("-t:")
+                append(targetsToExecute.replace(" ", ";"))
+            })
+        }.joinToString(" ")
 
         return super.toDotNetExecutable().copy(
             exePath = msbuildPath,
-            programParameterString = "--help",
+            programParameterString = parameters,
             executeAsIs = false
         )
     }
