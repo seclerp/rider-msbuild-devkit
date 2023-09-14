@@ -1,5 +1,6 @@
 package com.github.seclerp.msbuildrunner.components
 
+import com.intellij.openapi.editor.event.DocumentListener
 import com.intellij.openapi.observable.util.addDocumentListener
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.rd.createNestedDisposable
@@ -7,10 +8,13 @@ import com.intellij.openapi.ui.ComboBox
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.platform.backend.workspace.WorkspaceModel
 import com.intellij.ui.DocumentAdapter
+import com.intellij.ui.EditorTextField
 import com.intellij.ui.SimpleListCellRenderer
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.Cell
 import com.intellij.ui.dsl.builder.Row
+import com.intellij.util.textCompletion.TextCompletionProvider
+import com.intellij.util.textCompletion.TextFieldWithCompletion
 import com.jetbrains.rd.swing.addLifetimedItem
 import com.jetbrains.rd.util.TlsBoxed
 import com.jetbrains.rd.util.forbidReentrancy
@@ -29,9 +33,18 @@ import java.io.File
 import javax.swing.JList
 import javax.swing.event.DocumentEvent
 
-fun Row.targetsTextField(project: Project) =
-    cell(TargetsTextFieldFactory.create(project))
-        .comment("When multiple targets should be executed, use Space as separator.")
+fun Row.textFieldWithCompletion(project: Project, provider: TextCompletionProvider): Cell<TextFieldWithCompletion> {
+    val component = TextFieldWithCompletion(
+        project,
+        provider,
+        "suggest",
+        true,
+        true,
+        true,
+        true
+    )
+    return cell(component)
+}
 
 fun Row.projectSelector(project: Project): Cell<ComboBox<RunnableProject>> {
     return cell(ComboBox<RunnableProject>()).applyToComponent {
@@ -87,6 +100,7 @@ inline fun <reified T : Any> Cell<ComboBox<T>>.bindItem(property: IProperty<T?>,
     return this
 }
 
+@JvmName("JBTextField_bindText")
 fun Cell<JBTextField>.bindText(property: IProperty<String>, lifetime: Lifetime): Cell<JBTextField> {
     return applyToComponent {
         property.advise(lifetime) {
@@ -97,5 +111,19 @@ fun Cell<JBTextField>.bindText(property: IProperty<String>, lifetime: Lifetime):
                 property.set(text)
             }
         })
+    }
+}
+
+@JvmName("EditorTextField_bindText")
+fun Cell<EditorTextField>.bindText(property: IProperty<String>, lifetime: Lifetime): Cell<EditorTextField> {
+    return applyToComponent {
+        property.advise(lifetime) {
+            text = it
+        }
+        document.addDocumentListener(object : DocumentListener {
+            override fun documentChanged(event: com.intellij.openapi.editor.event.DocumentEvent) {
+                property.set(text)
+            }
+        }, lifetime.createNestedDisposable())
     }
 }

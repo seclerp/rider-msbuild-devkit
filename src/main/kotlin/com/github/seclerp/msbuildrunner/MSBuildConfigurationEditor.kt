@@ -1,27 +1,32 @@
 package com.github.seclerp.msbuildrunner
 
 import com.github.seclerp.msbuildrunner.components.*
+import com.github.seclerp.msbuildrunner.rd.MsBuildProjectInfo
+import com.github.seclerp.msbuildrunner.rd.msBuildRunnerModel
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogPanel
+import com.intellij.platform.backend.workspace.WorkspaceModel
 import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.panel
+import com.jetbrains.rd.framework.impl.startAndAdviseSuccess
 import com.jetbrains.rd.platform.util.lifetime
-import com.jetbrains.rd.swing.addLifetimedItem
 import com.jetbrains.rd.util.lifetime.Lifetime
 import com.jetbrains.rd.util.reactive.Property
 import com.jetbrains.rd.util.reactive.ViewableList
 import com.jetbrains.rd.util.reactive.adviseOnce
+import com.jetbrains.rdclient.util.idea.toVirtualFile
+import com.jetbrains.rider.model.RdProjectDescriptor
 import com.jetbrains.rider.model.RunnableProject
-import com.jetbrains.rider.model.RunnableProjectsModel
 import com.jetbrains.rider.model.runnableProjectsModel
 import com.jetbrains.rider.projectView.solution
+import com.jetbrains.rider.projectView.workspace.getProjectModelEntities
+import com.jetbrains.rider.projectView.workspace.isProject
 import com.jetbrains.rider.run.configurations.LifetimedSettingsEditor
-import com.jetbrains.rider.run.configurations.controls.bindTo
-import com.jetbrains.rider.run.configurations.runnableProjectsModelIfAvailable
 import javax.swing.JComponent
 
 class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettingsEditor<MSBuildRunConfiguration>() {
     private val targetsToExecute = Property("")
+    private val targetsCompletionProvider = MSBuildTargetsCompletionProvider()
     private val runnableProjects = ViewableList<RunnableProject>()
     private val targetProject = Property<RunnableProject?>(null)
     private val panels = mutableSetOf<DialogPanel>()
@@ -34,6 +39,19 @@ class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettin
                 runnableProjects.addAll(items)
                 projectListLt.onTermination {
                     runnableProjects.clear()
+                }
+            }
+        }
+
+        targetProject.advise(project.lifetime) { runnableProject ->
+            when (runnableProject) {
+                null -> targetsCompletionProvider.setItems(emptyList())
+                else -> {
+                    val fileUrl = runnableProject.projectFilePath.toVirtualFile(true) ?: return@advise
+                    val descriptor = WorkspaceModel.getInstance(project).getProjectModelEntities(fileUrl, project).firstOrNull { it.isProject() }?.descriptor as? RdProjectDescriptor ?: return@advise
+                    project.solution.msBuildRunnerModel.getTargets.startAndAdviseSuccess(MsBuildProjectInfo(descriptor.originalGuid)) {
+                        targetsCompletionProvider.setItems(it)
+                    }
                 }
             }
         }
@@ -53,8 +71,9 @@ class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettin
     override fun createEditor(lifetime: Lifetime): JComponent {
         val panel = panel {
             row("MSBuild Targets") {
-                targetsTextField(project)
+                textFieldWithCompletion(project, targetsCompletionProvider)
                     .bindText(targetsToExecute, lifetime)
+                    .comment("When multiple targets should be executed, use Space as separator.")
                     .align(AlignX.FILL)
             }
             row("Project") {
