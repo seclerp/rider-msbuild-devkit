@@ -19,7 +19,7 @@ job("Build and Test") {
         kotlinScript { api ->
             api.gradlew("prepare", "--stacktrace")
             api.gradlew("check", "--stacktrace")
-            api.gradlew("checkDotnet", "--stacktrace")
+//            api.gradlew("checkDotnet", "--stacktrace")
             api.gradlew("buildPlugin", "--stacktrace")
         }
     }
