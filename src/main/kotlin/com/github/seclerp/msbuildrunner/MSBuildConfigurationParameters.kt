@@ -1,8 +1,10 @@
 package com.github.seclerp.msbuildrunner
 
+import com.intellij.execution.CantRunException
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.JDOMExternalizerUtil
 import com.jetbrains.rider.model.RunnableProjectKind
+import com.jetbrains.rider.projectView.solution
 import com.jetbrains.rider.run.configurations.RunConfigurationHelper
 import com.jetbrains.rider.run.configurations.project.DotNetProjectConfigurationParameters
 import com.jetbrains.rider.run.configurations.project.DotNetStartBrowserParameters
@@ -51,7 +53,13 @@ class MSBuildConfigurationParameters(
 
     override fun toDotNetExecutable(): DotNetExecutable {
         // TODO: Generate MSBuild executable
-        return super.toDotNetExecutable()
+        val msbuildPath = project.solution.activeMsBuildPath.value ?: throw CantRunException("MSBuild isn't available")
+
+        return super.toDotNetExecutable().copy(
+            exePath = msbuildPath,
+            programParameterString = "--help",
+            executeAsIs = false
+        )
     }
 
     override fun readExternal(element: Element) {

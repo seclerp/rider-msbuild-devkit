@@ -64,14 +64,7 @@ class MSBuildExecutorFactory(private val project: Project, private val parameter
                 tryCreateReSharperHostSelfDebugState(environment, parameters, runtimeToExecute, dotNetExecutable)
                     ?: runtimeToExecute.createDebugState(dotNetExecutable, environment)
             }
-            else -> {
-                for (ext in DotNetProjectConfigurationExtension.EP_NAME.getExtensions(parameters.project)) {
-                    if (ext.canExecute(executorId)) {
-                        return ext.executor(parameters, environment)
-                    }
-                }
-                throw CantRunException(RiderRunBundle.message("dialog.message.unsupported.executor.error", executorId))
-            }
+            else -> throw CantRunException(RiderRunBundle.message("dialog.message.unsupported.executor.error", executorId))
         }
     }
 
