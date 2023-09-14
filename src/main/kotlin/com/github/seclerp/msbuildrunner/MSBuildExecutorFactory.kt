@@ -27,8 +27,6 @@ import com.jetbrains.rider.runtime.DotNetRuntime
 import com.jetbrains.rider.runtime.RiderDotNetActiveRuntimeHost
 
 class MSBuildExecutorFactory(private val project: Project, private val parameters: MSBuildConfigurationParameters) : AsyncExecutorFactory {
-    private val configurationType = ConfigurationTypeUtil.findConfigurationType(DotNetProjectConfigurationType::class.java)
-
     private val logger = getLogger<DotNetProjectExecutorFactory>()
 
     override suspend fun create(executorId: String, environment: ExecutionEnvironment, lifetime: Lifetime): RunProfileState {
@@ -45,9 +43,8 @@ class MSBuildExecutorFactory(private val project: Project, private val parameter
             DotNetProjectConfigurationParameters.SOLUTION_IS_LOADING
         )
         val runnableProject = projects.singleOrNull {
-            configurationType.isApplicable(it.kind) && it.projectFilePath == parameters.projectFilePath
-        }
-            ?: throw CantRunException(DotNetProjectConfigurationParameters.PROJECT_NOT_SPECIFIED)
+            MSBuildConfigurationType.isTypeApplicable(it.kind) && it.projectFilePath == parameters.projectFilePath
+        } ?: throw CantRunException(DotNetProjectConfigurationParameters.PROJECT_NOT_SPECIFIED)
 
         val output = parameters.tryGetProjectOutput(runnableProject)
         val hotReloadRunInfo = RuntimeHotReloadRunConfigurationInfo(executorId, project, runnableProject, parameters.getActualTfm(), output)

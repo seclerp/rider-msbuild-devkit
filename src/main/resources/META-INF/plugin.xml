@@ -15,6 +15,7 @@
         <applicationService serviceInterface="com.intellij.execution.impl.NewRunConfigurationTreePopupFactory"
                             serviceImplementation="com.github.seclerp.msbuildrunner.PatchedRiderNewRunConfigurationTreePopupFactory"
                             overrides="true"/>
+        <programRunner implementation="com.github.seclerp.msbuildrunner.MSBuildDotNetProgramRunner" />
     </extensions>
 
     <applicationListeners>
