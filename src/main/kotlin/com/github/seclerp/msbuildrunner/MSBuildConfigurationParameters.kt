@@ -1,13 +1,9 @@
 package com.github.seclerp.msbuildrunner
 
-import com.intellij.execution.CantRunException
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.JDOMExternalizerUtil
-import com.jetbrains.rider.model.RunnableProjectKind
-import com.jetbrains.rider.projectView.solution
 import com.jetbrains.rider.run.configurations.RunConfigurationHelper
-import com.jetbrains.rider.run.configurations.project.DotNetProjectConfigurationParameters
-import com.jetbrains.rider.run.configurations.project.DotNetStartBrowserParameters
+import com.jetbrains.rider.run.configurations.dotNetExe.DotNetExeConfigurationParameters
 import com.jetbrains.rider.runtime.DotNetExecutable
 import com.jetbrains.rider.runtime.DotNetRuntimeType
 import org.jdom.Element
@@ -21,40 +17,31 @@ class MSBuildConfigurationParameters(
     isPassParentEnvs: Boolean,
     useExternalConsole: Boolean,
     runtimeArguments: String,
-    projectFilePath: String,
-    trackProjectExePath: Boolean,
-    trackProjectArguments: Boolean,
-    trackProjectWorkingDirectory: Boolean,
-    projectKind: RunnableProjectKind,
-    projectTfm: String,
-    startBrowserParameters: DotNetStartBrowserParameters,
     runtimeType: DotNetRuntimeType?,
-    var targetsToExecute: String,
-) : DotNetProjectConfigurationParameters(project,
+    var executeAsIs: Boolean,
+    var assemblyToDebug: String?,
+    var projectFilePath: String,
+    var targetsToExecute: String
+) : DotNetExeConfigurationParameters(project,
     exePath,
     programParameters,
     workingDirectory,
     envs,
     isPassParentEnvs,
     useExternalConsole,
+    executeAsIs,
+    assemblyToDebug,
     runtimeArguments,
-    projectFilePath,
-    trackProjectExePath,
-    trackProjectArguments,
-    trackProjectWorkingDirectory,
-    projectKind,
-    projectTfm,
-    startBrowserParameters,
     runtimeType) {
 
     companion object {
         private const val MSBUILD_TARGETS = "MSBUILD_TARGETS"
+        private const val PROJECT_FILE_PATH = "PROJECT_FILE_PATH"
     }
 
     override fun toDotNetExecutable(): DotNetExecutable {
         val base = super.toDotNetExecutable()
         // TODO: Generate MSBuild executable
-        val msbuildPath = project.solution.activeMsBuildPath.value ?: throw CantRunException("MSBuild isn't available")
         val parameters = buildList {
             add(projectFilePath)
             add(buildString {
@@ -65,7 +52,6 @@ class MSBuildConfigurationParameters(
         }.joinToString(" ")
 
         return base.copy(
-            exePath = msbuildPath,
             programParameterString = parameters,
             executeAsIs = false
         )
@@ -74,11 +60,13 @@ class MSBuildConfigurationParameters(
     override fun readExternal(element: Element) {
         super.readExternal(element)
         targetsToExecute = JDOMExternalizerUtil.readField(element, MSBUILD_TARGETS) ?: ""
+        projectFilePath = JDOMExternalizerUtil.readField(element, PROJECT_FILE_PATH) ?: ""
     }
 
     override fun writeExternal(element: Element) {
         super.writeExternal(element)
         JDOMExternalizerUtil.writeField(element, MSBUILD_TARGETS, targetsToExecute)
+        JDOMExternalizerUtil.writeField(element, PROJECT_FILE_PATH, projectFilePath)
     }
 
     override fun copy(): MSBuildConfigurationParameters {
@@ -90,17 +78,13 @@ class MSBuildConfigurationParameters(
             envs = RunConfigurationHelper.copyEnvs(envs),
             isPassParentEnvs = isPassParentEnvs,
             useExternalConsole = useExternalConsole,
+            executeAsIs = executeAsIs,
+            assemblyToDebug = assemblyToDebug,
             runtimeArguments = runtimeArguments,
-            projectFilePath = projectFilePath,
-            trackProjectExePath = trackProjectExePath,
-            trackProjectArguments = trackProjectArguments,
-            trackProjectWorkingDirectory = trackProjectWorkingDirectory,
-            projectKind = projectKind,
-            projectTfm = projectTfm,
-            startBrowserParameters = startBrowserParameters.copy(),
             runtimeType = runtimeType,
             //
-            targetsToExecute = targetsToExecute
+            targetsToExecute = targetsToExecute,
+            projectFilePath = projectFilePath
         )
     }
 

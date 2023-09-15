@@ -1,5 +1,6 @@
 package com.github.seclerp.msbuildrunner.components
 
+import com.github.seclerp.msbuildrunner.MSBuildProjectInfo
 import com.intellij.execution.configuration.EnvironmentVariablesComponent
 import com.intellij.openapi.editor.event.DocumentListener
 import com.intellij.openapi.observable.util.addDocumentListener
@@ -25,7 +26,6 @@ import com.jetbrains.rd.util.lifetime.Lifetime
 import com.jetbrains.rd.util.lifetime.isNotAlive
 import com.jetbrains.rd.util.reactive.IProperty
 import com.jetbrains.rd.util.reactive.IViewableList
-import com.jetbrains.rider.model.RunnableProject
 import com.jetbrains.rider.projectView.calculateIcon
 import com.jetbrains.rider.projectView.workspace.getProjectModelEntities
 import com.jetbrains.rider.projectView.workspace.isProject
@@ -51,12 +51,12 @@ fun Row.textFieldWithCompletion(project: Project, provider: TextCompletionProvid
     return cell(component)
 }
 
-fun Row.projectSelector(project: Project): Cell<ComboBox<RunnableProject>> {
-    return cell(ComboBox<RunnableProject>()).applyToComponent {
+fun Row.projectSelector(project: Project): Cell<ComboBox<MSBuildProjectInfo>> {
+    return cell(ComboBox<MSBuildProjectInfo>()).applyToComponent {
         isSwingPopup = false
-        renderer = object : SimpleListCellRenderer<RunnableProject?>() {
-            override fun customize(list: JList<out RunnableProject?>,
-                                   value: RunnableProject?,
+        renderer = object : SimpleListCellRenderer<MSBuildProjectInfo?>() {
+            override fun customize(list: JList<out MSBuildProjectInfo?>,
+                                   value: MSBuildProjectInfo?,
                                    index: Int,
                                    selected: Boolean,
                                    hasFocus: Boolean) {
@@ -65,14 +65,14 @@ fun Row.projectSelector(project: Project): Cell<ComboBox<RunnableProject>> {
                     text = RiderRunBundle.message("ControlViewBuilder.project.selector.cell.without.projects")
                     return
                 }
-                VfsUtil.findFileByIoFile(File(value.projectFilePath), false)?.let { virtualFile ->
+                VfsUtil.findFileByIoFile(File(value.filePath), false)?.let { virtualFile ->
                     WorkspaceModel.getInstance(project)
                         .getProjectModelEntities(virtualFile, project).singleOrNull { it.isProject() || it.isUnloadedProject() }?.calculateIcon(
                             project
                         )
                         ?.let { icon = it }
                 }
-                text = value.fullName
+                text = value.name
             }
         }
     }
