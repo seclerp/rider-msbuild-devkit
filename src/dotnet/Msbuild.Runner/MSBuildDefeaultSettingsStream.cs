@@ -1,7 +1,5 @@
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Threading;
 using JetBrains.Application;
 using JetBrains.Application.Settings;
 using JetBrains.Lifetimes;
@@ -20,8 +18,7 @@ public class MSBuildDefeaultSettingsStream : IHaveDefaultSettingsStream
 
     public Stream GetDefaultSettingsStream(Lifetime lifetime)
     {
-        while (!Debugger.IsAttached) { Thread.Sleep(100);}
-        var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Msbuild.Runner.FileTemplates.MSBuildTask.xml");
+        var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Msbuild.Runner.FileTemplates.MSBuildFileTemplates.xml");
         lifetime.AddDispose(stream);
         return stream;
     }

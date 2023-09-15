@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Include="FileTemplates\MSBuildTask.xml" />
+      <EmbeddedResource Include="FileTemplates\MSBuildFileTemplates.xml" />
     </ItemGroup>
 
 </Project>

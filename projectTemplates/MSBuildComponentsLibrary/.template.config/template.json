@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "seclerp",
+  "name": "MSBuild Library",
+  "description": "A library that contains custom MSBuild tasks and targets.",
+  "defaultName": "MSBuildLibrary1",
+  "classifications": [
+    "MSBuild"
+  ],
+  "identity": "MSBuild.DevKit.ComponentsLibrary.CSharp",
+  "shortName": "msbuildlib",
+  "tags": {
+    "type": "project",
+    "language": "C#",
+    "platform": "MSBuild",
+    "hasMultipleProjects": "false"
+  },
+  "sourceName": "CSharpMSBuildLibraryProjectTemplate",
+  "preferNameDirectory": true,
+  "symbols": {
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "replaces": "netstandard2.0",
+      "choices": [
+        {
+          "choice": "netstandard2.0"
+        },
+        {
+          "choice": "netstandard2.1"
+        },
+        {
+          "choice": "net6.0"
+        },
+        {
+          "choice": "net7.0"
+        },
+        {
+          "choice": "net8.0"
+        }
+      ],
+      "defaultValue": "netstandard2.0"
+    }
+  },
+  "primaryOutputs": [
+    {
+      "path": "CSharpMSBuildLibraryProjectTemplate/CSharpMSBuildLibraryProjectTemplate.csproj"
+    }
+  ],
+  "postActions": [
+    {
+      "description": "Build MSBuild project",
+      "manualInstructions": [
+        {
+          "text": "To enable the IDE to run MSBuild tasks, build the MSBuild Library project"
+        }
+      ],
+      "actionId": "AC1156F7-BB77-4DB8-B28F-24EEBCCA1E5C",
+      "continueOnError": true
+    }
+  ]
+}

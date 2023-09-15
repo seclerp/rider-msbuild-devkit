@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <IsPackable>true</IsPackable>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+
+        <RootNamespace>CSharpMSBuildLibraryProjectTemplate</RootNamespace>
+        <PackageId>CSharpMSBuildLibraryProjectTemplate</PackageId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Build.Framework" Version="17.7.2" />
+        <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.7.2" />
+    </ItemGroup>
+
+</Project>

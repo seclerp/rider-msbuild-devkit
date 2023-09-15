@@ -1,0 +1,98 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <!-- Begin "MSBuild Task" template -->
+
+    <s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=97A9B38EC109564B84A8AFA30A085836/@KeyIndexDefined">True</s:Boolean>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=97A9B38EC109564B84A8AFA30A085836/EntryName/@EntryValue">MSBuild Task</s:String>
+    <s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=97A9B38EC109564B84A8AFA30A085836/Position/@EntryValue">1</s:Int64>
+
+    <s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/Description/@EntryValue">&amp;MSBuild Task</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/Text/@EntryValue">using System;&#xD;
+using Microsoft.Build.Framework;&#xD;
+using Microsoft.Build.Utilities;&#xD;
+&#xD;
+namespace $NAMESPACE$&#xD;
+{&#xD;
+  public class $CLASS$: Microsoft.Build.Utilities.Task&#xD;
+  {&#xD;
+    public override bool Execute()&#xD;
+     {&#xD;
+	  $END$return true;&#xD;
+    }&#xD;
+  }&#xD;
+}</s:String>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/Image/@EntryValue">MSBuildTaskImage</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/UITag/@EntryValue">Class/Interface</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/CustomProperties/=FileName/@EntryIndexedValue">Task</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/Field/=CLASS/Expression/@EntryValue">getAlphaNumericFileNameWithoutExtension()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/Field/=CLASS/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/Field/=NAMESPACE/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/Field/=NAMESPACE/Expression/@EntryValue">fileDefaultNamespace()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=97A9B38EC109564B84A8AFA30A085836/Field/=NAMESPACE/Order/@EntryValue">1</s:Int64>
+
+    <!-- End "MSBuild Task" template -->
+
+    <!-- Begin "MSBuild Targets (.targets)" template -->
+
+    <s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=5B37FF6F9E7D2A468C708FFF59034C8B/@KeyIndexDefined">True</s:Boolean>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=5B37FF6F9E7D2A468C708FFF59034C8B/EntryName/@EntryValue">Targets File (.targets)</s:String>
+    <s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=5B37FF6F9E7D2A468C708FFF59034C8B/Position/@EntryValue">2</s:Int64>
+
+    <s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5B37FF6F9E7D2A468C708FFF59034C8B/@KeyIndexDefined">True</s:Boolean>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5B37FF6F9E7D2A468C708FFF59034C8B/Description/@EntryValue">&amp;Targets File (.targets)</s:String>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5B37FF6F9E7D2A468C708FFF59034C8B/Text/@EntryValue">&lt;Project&gt;&#xD;
+  &lt;!-- See https://aka.ms/dotnet/msbuild/customize for more details on customizing your build --&gt;&#xD;
+  &lt;Target Name="CustomAfterBuildTarget" AfterTargets="Build"&gt;&#xD;
+      &lt;Message Text="Hello from CustomAfterBuildTarget" Importance="high" /&gt;&#xD;
+  &lt;/Target&gt;&#xD;
+&lt;/Project&gt;&#xD;
+</s:String>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5B37FF6F9E7D2A468C708FFF59034C8B/UITag/@EntryValue">MSBuild Item</s:String>
+    <s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5B37FF6F9E7D2A468C708FFF59034C8B/Reformat/@EntryValue">True</s:Boolean>
+    <s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5B37FF6F9E7D2A468C708FFF59034C8B/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5B37FF6F9E7D2A468C708FFF59034C8B/CustomProperties/=FileName/@EntryIndexedValue">MyTargets</s:String>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5B37FF6F9E7D2A468C708FFF59034C8B/CustomProperties/=Extension/@EntryIndexedValue">targets</s:String>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5B37FF6F9E7D2A468C708FFF59034C8B/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
+    <s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5B37FF6F9E7D2A468C708FFF59034C8B/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+    <s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5B37FF6F9E7D2A468C708FFF59034C8B/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=5B37FF6F9E7D2A468C708FFF59034C8B/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
+
+    <!-- End "MSBuild Targets (.targets)" template -->
+
+    <!-- Begin "MSBuild Properties (.props)" template -->
+
+    <s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=DE85F73CB769FE4A990BFC0DFCFE398F/@KeyIndexDefined">True</s:Boolean>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=DE85F73CB769FE4A990BFC0DFCFE398F/EntryName/@EntryValue">Properties File (.props)</s:String>
+    <s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=DE85F73CB769FE4A990BFC0DFCFE398F/Position/@EntryValue">2</s:Int64>
+
+    <s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=DE85F73CB769FE4A990BFC0DFCFE398F/@KeyIndexDefined">True</s:Boolean>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=DE85F73CB769FE4A990BFC0DFCFE398F/Description/@EntryValue">&amp;Properties File (.props)</s:String>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=DE85F73CB769FE4A990BFC0DFCFE398F/Text/@EntryValue">&lt;Project&gt;&#xD;
+  &lt;!-- See https://aka.ms/dotnet/msbuild/customize for more details on customizing your build --&gt;&#xD;
+  &lt;PropertyGroup&gt;&#xD;
+&#xD;
+  &lt;/PropertyGroup&gt;&#xD;
+&lt;/Project&gt;&#xD;
+</s:String>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=DE85F73CB769FE4A990BFC0DFCFE398F/UITag/@EntryValue">MSBuild Item</s:String>
+    <s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=DE85F73CB769FE4A990BFC0DFCFE398F/Reformat/@EntryValue">True</s:Boolean>
+    <s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=DE85F73CB769FE4A990BFC0DFCFE398F/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=DE85F73CB769FE4A990BFC0DFCFE398F/CustomProperties/=FileName/@EntryIndexedValue">MyProperties</s:String>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=DE85F73CB769FE4A990BFC0DFCFE398F/CustomProperties/=Extension/@EntryIndexedValue">props</s:String>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=DE85F73CB769FE4A990BFC0DFCFE398F/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
+    <s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=DE85F73CB769FE4A990BFC0DFCFE398F/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+    <s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=DE85F73CB769FE4A990BFC0DFCFE398F/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
+    <s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=DE85F73CB769FE4A990BFC0DFCFE398F/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
+
+    <!-- End "MSBuild Properties (.props)" template -->
+
+</wpf:ResourceDictionary>

@@ -250,6 +250,9 @@ tasks {
             from(f) { into("${rootProject.name}/dotnet") }
         }
 
+        // Pack project templates
+        from("projectTemplates") { into("${rootProject.name}/projectTemplates") }
+
         doLast {
             for (f in backendFiles) {
                 val file = file(f)
