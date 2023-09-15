@@ -52,7 +52,7 @@ open class MSBuildRunConfiguration(
         parameters.writeExternal(element)
     }
 
-    override fun isNative() = parameters.isNative
+    override fun isNative() = false
 
     override fun acceptsPostStartupActivity(activityClass: Class<out IPostStartupActivity>): Boolean = acceptsDefaultPostStartupActivity(
         activityClass)
