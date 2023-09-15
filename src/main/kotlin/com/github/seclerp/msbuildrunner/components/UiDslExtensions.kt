@@ -31,6 +31,8 @@ import com.jetbrains.rider.projectView.workspace.getProjectModelEntities
 import com.jetbrains.rider.projectView.workspace.isProject
 import com.jetbrains.rider.projectView.workspace.isUnloadedProject
 import com.jetbrains.rider.run.RiderRunBundle
+import com.jetbrains.rider.run.configurations.controls.runtimeSelection.RuntimeSelector
+import com.jetbrains.rider.run.configurations.controls.runtimeSelection.RuntimeSelectorComboBox
 import java.awt.event.ItemListener
 import java.io.File
 import javax.swing.JList
@@ -87,6 +89,10 @@ fun Row.envVarsEditor(): Cell<EnvironmentVariablesComponent> {
     return cell(EnvironmentVariablesComponent()).applyToComponent {
         label.isVisible = false
     }
+}
+
+fun Row.runtimeSelector(project: Project, selector: RuntimeSelector, lifetime: Lifetime): Cell<RuntimeSelectorComboBox> {
+    return cell(RuntimeSelectorComboBox(selector, project, lifetime, null))
 }
 
 fun <T : Any> Cell<ComboBox<T>>.bindItems(property: IViewableList<T>, lifetime: Lifetime): Cell<ComboBox<T>> {

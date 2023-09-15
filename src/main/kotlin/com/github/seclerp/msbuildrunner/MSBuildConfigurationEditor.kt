@@ -22,7 +22,9 @@ import com.jetbrains.rider.model.runnableProjectsModel
 import com.jetbrains.rider.projectView.solution
 import com.jetbrains.rider.projectView.workspace.getProjectModelEntities
 import com.jetbrains.rider.projectView.workspace.isProject
+import com.jetbrains.rider.run.RiderRunBundle
 import com.jetbrains.rider.run.configurations.LifetimedSettingsEditor
+import com.jetbrains.rider.run.configurations.controls.runtimeSelection.RuntimeSelector
 import javax.swing.JComponent
 
 class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettingsEditor<MSBuildRunConfiguration>() {
@@ -30,6 +32,7 @@ class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettin
     private val targetProject = Property<RunnableProject?>(null)
     private val programArguments = Property("")
     private val envs: IProperty<Map<String, String>> = Property(hashMapOf())
+    private val runtimeSelector = RuntimeSelector(RiderRunBundle.message("label.runtime"), "Runtime", project, project.lifetime)
 
 
 
@@ -68,6 +71,7 @@ class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettin
         targetProject.value = getProjectByPath(configuration.parameters.projectFilePath)
         programArguments.value = configuration.parameters.programParameters
         envs.value = configuration.parameters.envs
+        runtimeSelector.runtime.value = configuration.parameters.runtimeType
     }
 
     override fun applyEditorTo(configuration: MSBuildRunConfiguration) {
@@ -75,6 +79,8 @@ class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettin
         configuration.parameters.targetsToExecute = targetsToExecute.value
         configuration.parameters.projectFilePath = targetProject.value?.projectFilePath ?: ""
         configuration.parameters.envs = envs.value
+        configuration.parameters.programParameters = programArguments.value
+        configuration.parameters.runtimeType = runtimeSelector.runtime.value
     }
 
     override fun createEditor(lifetime: Lifetime): JComponent {
@@ -99,6 +105,10 @@ class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettin
             row("Environment variables") {
                 envVarsEditor()
                     .bindItems(envs, lifetime)
+                    .align(AlignX.FILL)
+            }
+            row("Runtime") {
+                runtimeSelector(project, runtimeSelector, lifetime)
                     .align(AlignX.FILL)
             }
         }
