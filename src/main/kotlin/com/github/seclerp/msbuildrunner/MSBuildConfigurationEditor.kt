@@ -11,6 +11,7 @@ import com.intellij.ui.dsl.builder.panel
 import com.jetbrains.rd.framework.impl.startAndAdviseSuccess
 import com.jetbrains.rd.platform.util.lifetime
 import com.jetbrains.rd.util.lifetime.Lifetime
+import com.jetbrains.rd.util.reactive.IProperty
 import com.jetbrains.rd.util.reactive.Property
 import com.jetbrains.rd.util.reactive.ViewableList
 import com.jetbrains.rd.util.reactive.adviseOnce
@@ -26,9 +27,14 @@ import javax.swing.JComponent
 
 class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettingsEditor<MSBuildRunConfiguration>() {
     private val targetsToExecute = Property("")
+    private val targetProject = Property<RunnableProject?>(null)
+    private val programArguments = Property("")
+    private val envs: IProperty<Map<String, String>> = Property(hashMapOf())
+
+
+
     private val targetsCompletionProvider = MSBuildTargetsCompletionProvider()
     private val runnableProjects = ViewableList<RunnableProject>()
-    private val targetProject = Property<RunnableProject?>(null)
     private val panels = mutableSetOf<DialogPanel>()
 
     init {
@@ -60,12 +66,15 @@ class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettin
     override fun resetEditorFrom(configuration: MSBuildRunConfiguration) {
         targetsToExecute.value = configuration.parameters.targetsToExecute
         targetProject.value = getProjectByPath(configuration.parameters.projectFilePath)
+        programArguments.value = configuration.parameters.programParameters
+        envs.value = configuration.parameters.envs
     }
 
     override fun applyEditorTo(configuration: MSBuildRunConfiguration) {
         panels.forEach { it.apply() }
         configuration.parameters.targetsToExecute = targetsToExecute.value
         configuration.parameters.projectFilePath = targetProject.value?.projectFilePath ?: ""
+        configuration.parameters.envs = envs.value
     }
 
     override fun createEditor(lifetime: Lifetime): JComponent {
@@ -80,6 +89,16 @@ class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettin
                 projectSelector(project)
                     .bindItem(targetProject, lifetime)
                     .bindItems(runnableProjects, lifetime)
+                    .align(AlignX.FILL)
+            }
+            row("Program arguments") {
+                commandLineArgsEditor()
+                    .bindText(programArguments, lifetime)
+                    .align(AlignX.FILL)
+            }
+            row("Environment variables") {
+                envVarsEditor()
+                    .bindItems(envs, lifetime)
                     .align(AlignX.FILL)
             }
         }

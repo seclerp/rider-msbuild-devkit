@@ -1,14 +1,17 @@
 package com.github.seclerp.msbuildrunner.components
 
+import com.intellij.execution.configuration.EnvironmentVariablesComponent
 import com.intellij.openapi.editor.event.DocumentListener
 import com.intellij.openapi.observable.util.addDocumentListener
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.rd.createNestedDisposable
 import com.intellij.openapi.ui.ComboBox
+import com.intellij.openapi.util.SystemInfo
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.platform.backend.workspace.WorkspaceModel
 import com.intellij.ui.DocumentAdapter
 import com.intellij.ui.EditorTextField
+import com.intellij.ui.RawCommandLineEditor
 import com.intellij.ui.SimpleListCellRenderer
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.Cell
@@ -73,6 +76,19 @@ fun Row.projectSelector(project: Project): Cell<ComboBox<RunnableProject>> {
     }
 }
 
+fun Row.commandLineArgsEditor(): Cell<RawCommandLineEditor> {
+    return cell(RawCommandLineEditor()).applyToComponent {
+        if (!SystemInfo.isMac)
+            editorField.setMonospaced(false)
+    }
+}
+
+fun Row.envVarsEditor(): Cell<EnvironmentVariablesComponent> {
+    return cell(EnvironmentVariablesComponent()).applyToComponent {
+        label.isVisible = false
+    }
+}
+
 fun <T : Any> Cell<ComboBox<T>>.bindItems(property: IViewableList<T>, lifetime: Lifetime): Cell<ComboBox<T>> {
     property.view(lifetime) { projectLt, _, proj ->
         component.addLifetimedItem(projectLt, proj)
@@ -108,7 +124,9 @@ fun Cell<JBTextField>.bindText(property: IProperty<String>, lifetime: Lifetime):
         }
         document.addDocumentListener(lifetime.createNestedDisposable(), object : DocumentAdapter() {
             override fun textChanged(e: DocumentEvent) {
-                property.set(text)
+                if (text != property.value) {
+                    property.set(text)
+                }
             }
         })
     }
@@ -122,8 +140,44 @@ fun Cell<EditorTextField>.bindText(property: IProperty<String>, lifetime: Lifeti
         }
         document.addDocumentListener(object : DocumentListener {
             override fun documentChanged(event: com.intellij.openapi.editor.event.DocumentEvent) {
-                property.set(text)
+                if (text != property.value) {
+                    property.set(text)
+                }
             }
         }, lifetime.createNestedDisposable())
+    }
+}
+
+@JvmName("RawCommandLineEditor_bindText")
+fun Cell<RawCommandLineEditor>.bindText(property: IProperty<String>, lifetime: Lifetime): Cell<RawCommandLineEditor> {
+    return applyToComponent {
+        property.advise(lifetime) {
+            text = it
+        }
+        document.addDocumentListener(lifetime.createNestedDisposable(), object : DocumentAdapter() {
+            override fun textChanged(e: DocumentEvent) {
+                if (text != property.value) {
+                    property.set(text)
+                }
+            }
+        })
+    }
+}
+
+fun Cell<EnvironmentVariablesComponent>.bindItems(property: IProperty<Map<String, String>>, lifetime: Lifetime): Cell<EnvironmentVariablesComponent> {
+    return applyToComponent {
+        val guard = TlsBoxed(false)
+        property.advise(lifetime) {
+            if (this.envs != it) {
+                guard.forbidReentrancy {
+                    this.envs = it
+                }
+            }
+        }
+        addChangeListener {
+            if (guard.value) return@addChangeListener
+
+            property.set(this.envs)
+        }
     }
 }
