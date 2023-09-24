@@ -16,8 +16,8 @@ object MsBuildRunnerModel : Ext(SolutionModel.Solution) {
     }
 
     init {
-        setting(CSharp50Generator.Namespace, "Msbuild.Runner.Rd")
-        setting(Kotlin11Generator.Namespace, "com.github.seclerp.msbuildrunner.rd")
+        setting(CSharp50Generator.Namespace, "MSBuild.DevKit.Rd")
+        setting(Kotlin11Generator.Namespace, "me.seclerp.msbuild.devkit.rd")
 
         call("getTargets", MsBuildProjectInfo, immutableList(MsBuildTargetInfo))
     }

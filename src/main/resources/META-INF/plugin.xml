@@ -1,24 +1,24 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.seclerp.msbuildrunner</id>
-    <name>Msbuild-Runner Template</name>
-    <vendor>JetBrains</vendor>
+    <id>{PLACEHOLDER}</id>
+    <name>MSBuild DevKit</name>
+    <vendor>seclerp</vendor>
 
     <depends>com.intellij.modules.rider</depends>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.seclerp.msbuildrunner.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <toolWindow factoryClass="me.seclerp.msbuild.devkit.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
         <configurationType
-                implementation="com.github.seclerp.msbuildrunner.MSBuildConfigurationType"/>
+                implementation="me.seclerp.msbuild.devkit.MSBuildConfigurationType"/>
         <applicationService serviceInterface="com.intellij.execution.impl.NewRunConfigurationTreePopupFactory"
-                            serviceImplementation="com.github.seclerp.msbuildrunner.PatchedRiderNewRunConfigurationTreePopupFactory"
+                            serviceImplementation="me.seclerp.msbuild.devkit.PatchedRiderNewRunConfigurationTreePopupFactory"
                             overrides="true"/>
-        <programRunner implementation="com.github.seclerp.msbuildrunner.MSBuildDotNetProgramRunner" />
+        <programRunner implementation="me.seclerp.msbuild.devkit.MSBuildDotNetProgramRunner" />
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.seclerp.msbuildrunner.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
+        <listener class="me.seclerp.msbuild.devkit.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
     </applicationListeners>
 </idea-plugin>
