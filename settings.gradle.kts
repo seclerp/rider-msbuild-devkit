@@ -7,6 +7,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = "msbuild-runner"
+rootProject.name = "msbuild-devkit"
 
 include("protocol")

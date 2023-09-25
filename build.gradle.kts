@@ -40,17 +40,15 @@ fun File.writeTextIfChanged(content: String) {
         writeBytes(bytes)
     }
 }
+val pluginId: String by project
+val pluginVersion: String by project
 
-group = properties("pluginGroup").get()
-version = properties("pluginVersion").get()
-
-val pluginName: String by project
-val pluginGroup: String by project
-val pluginFullName = "$pluginGroup.$pluginName"
+group = pluginId
+version = pluginVersion
 
 // Folder that contains sources for Rider-specific plugin's .NET backend
 val dotnetSrcDir = File(projectDir, "src/dotnet")
-val dotnetPluginNamespace: String by project
+val pluginNamespace: String by project
 val dotnetBuildConfiguration = ext.properties["dotnetBuildConfiguration"] ?: "Debug"
 
 // Rd protocol library configuration
@@ -80,7 +78,7 @@ kotlin {
 
 // Configure Gradle IntelliJ Plugin - read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    pluginName = properties("pluginName")
+    pluginName = rootProject.name
     version = properties("platformVersion")
     type = properties("platformType")
 
@@ -114,8 +112,8 @@ koverReport {
 // Configure Rd model generation
 configure<RdGenExtension> {
     val modelDir = file("$projectDir/protocol/src/main/kotlin/model")
-    val csOutput = file("$projectDir/src/dotnet/$dotnetPluginNamespace/Rd")
-    val ktOutput = file("$projectDir/src/main/kotlin/${pluginGroup.replace('.','/').lowercase()}/rd")
+    val csOutput = file("$projectDir/src/dotnet/$pluginNamespace/Rd")
+    val ktOutput = file("$projectDir/src/main/kotlin/${pluginId.replace('.','/').lowercase()}/rd")
 
     verbose = true
     classpath({
@@ -129,7 +127,7 @@ configure<RdGenExtension> {
         language = "kotlin"
         transform = "asis"
         root = "com.jetbrains.rider.model.nova.ide.IdeRoot"
-        namespace = "$pluginGroup.$pluginName.rd"
+        namespace = "$pluginId.rd"
         directory = "$ktOutput"
     }
 
@@ -137,7 +135,7 @@ configure<RdGenExtension> {
         language = "csharp"
         transform = "reversed"
         root = "com.jetbrains.rider.model.nova.ide.IdeRoot"
-        namespace = "$dotnetPluginNamespace.Rd"
+        namespace = "$pluginNamespace.Rd"
         directory = "$csOutput"
     }
 }
@@ -240,10 +238,10 @@ tasks {
     prepareSandbox {
         dependsOn(dotnetCompile)
 
-        val outputFolder = file("$dotnetSrcDir/$dotnetPluginNamespace/bin/$dotnetPluginNamespace/$dotnetBuildConfiguration")
+        val outputFolder = file("$dotnetSrcDir/$pluginNamespace/bin/$pluginNamespace/$dotnetBuildConfiguration")
         val backendFiles = listOf(
-            "$outputFolder/$dotnetPluginNamespace.dll",
-            "$outputFolder/$dotnetPluginNamespace.pdb"
+            "$outputFolder/$pluginNamespace.dll",
+            "$outputFolder/$pluginNamespace.pdb"
         )
 
         for (f in backendFiles) {
