@@ -17,8 +17,6 @@ EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSBuild.DevKit", "MSBuild.DevKit\MSBuild.DevKit.csproj", "{EC3C8004-EA0A-46E1-AE45-4A7A1FBDF35A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSBuild.DevKit.Tests", "MSBuild.DevKit.Tests\MSBuild.DevKit.Tests.csproj", "{783A4250-0B5B-4B56-8EE0-A2ECB4639CA7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,9 +30,5 @@ Global
 		{EC3C8004-EA0A-46E1-AE45-4A7A1FBDF35A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC3C8004-EA0A-46E1-AE45-4A7A1FBDF35A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC3C8004-EA0A-46E1-AE45-4A7A1FBDF35A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{783A4250-0B5B-4B56-8EE0-A2ECB4639CA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{783A4250-0B5B-4B56-8EE0-A2ECB4639CA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{783A4250-0B5B-4B56-8EE0-A2ECB4639CA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{783A4250-0B5B-4B56-8EE0-A2ECB4639CA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
