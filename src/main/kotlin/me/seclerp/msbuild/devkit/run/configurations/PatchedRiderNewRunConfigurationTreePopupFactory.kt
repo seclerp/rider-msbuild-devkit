@@ -1,4 +1,4 @@
-package me.seclerp.msbuild.devkit
+package me.seclerp.msbuild.devkit.run.configurations
 
 import com.intellij.execution.configurations.ConfigurationTypeUtil
 import com.intellij.execution.impl.DefaultNewRunConfigurationTreePopupFactory
@@ -8,6 +8,11 @@ import com.intellij.openapi.util.Pair
 import com.jetbrains.rider.run.configurations.RiderNewRunConfigurationTreePopupFactory
 import javax.swing.Icon
 
+/**
+ * Here we use a little hack to inject MSBuild configuration into existing .NET group, since current abstraction encapsulation
+ * doesn't allow to do so properly.
+ * The class itself is a proxy to existing [RiderNewRunConfigurationTreePopupFactory].
+ */
 class PatchedRiderNewRunConfigurationTreePopupFactory : DefaultNewRunConfigurationTreePopupFactory() {
     private val riderFactory = RiderNewRunConfigurationTreePopupFactory()
 

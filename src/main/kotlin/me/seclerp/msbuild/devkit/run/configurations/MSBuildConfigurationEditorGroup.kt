@@ -1,4 +1,4 @@
-package me.seclerp.msbuild.devkit
+package me.seclerp.msbuild.devkit.run.configurations
 
 import com.intellij.openapi.options.SettingsEditorGroup
 import com.intellij.openapi.project.Project

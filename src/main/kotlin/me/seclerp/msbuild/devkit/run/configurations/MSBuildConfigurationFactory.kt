@@ -1,4 +1,4 @@
-package me.seclerp.msbuild.devkit
+package me.seclerp.msbuild.devkit.run.configurations
 
 import com.intellij.execution.configurations.ConfigurationFactory
 import com.intellij.execution.configurations.ConfigurationType

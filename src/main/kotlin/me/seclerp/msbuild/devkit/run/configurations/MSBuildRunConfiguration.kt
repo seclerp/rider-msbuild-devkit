@@ -1,4 +1,4 @@
-package me.seclerp.msbuild.devkit
+package me.seclerp.msbuild.devkit.run.configurations
 
 import com.intellij.execution.configurations.ConfigurationFactory
 import com.intellij.execution.configurations.RunConfiguration
@@ -10,8 +10,8 @@ import com.jetbrains.rider.run.ICanRunFromBackend
 import com.jetbrains.rider.run.configurations.*
 import com.jetbrains.rider.run.postStartupActivities.IPostStartupActivity
 import com.jetbrains.rider.runtime.RiderDotNetActiveRuntimeHost
+import me.seclerp.msbuild.devkit.run.MSBuildExecutorFactory
 import org.jdom.Element
-
 
 open class MSBuildRunConfiguration(
     name: String,
@@ -23,7 +23,7 @@ open class MSBuildRunConfiguration(
     project,
     factory,
     { MSBuildConfigurationEditorGroup(it) },
-    MSBuildExecutorFactory(project, parameters)
+    MSBuildExecutorFactory(parameters)
 ), IRiderDebuggable, ICanRunFromBackend, IProjectBasedRunConfiguration, IDotNetRunConfigurationWithPostStartupActivitiesSupport {
     override fun getTypeId(): String {
         return type.id
@@ -54,12 +54,13 @@ open class MSBuildRunConfiguration(
 
     override fun isNative() = false
 
-    override fun acceptsPostStartupActivity(activityClass: Class<out IPostStartupActivity>): Boolean = acceptsDefaultPostStartupActivity(
-        activityClass)
+    override fun acceptsPostStartupActivity(activityClass: Class<out IPostStartupActivity>): Boolean =
+        acceptsDefaultPostStartupActivity(activityClass)
 
-    override suspend fun createPostStartupActivity(runProfileState: RunProfileState,
-                                                   environment: ExecutionEnvironment): IPostStartupActivity? = createDefaultPostStartupActivity(
-        runProfileState, environment)
+    override suspend fun createPostStartupActivity(
+        runProfileState: RunProfileState,
+        environment: ExecutionEnvironment
+    ): IPostStartupActivity? = createDefaultPostStartupActivity(runProfileState, environment)
 
     override fun clone(): RunConfiguration {
         val newConfiguration = MSBuildRunConfiguration(name, project, factory!!, parameters.copy())

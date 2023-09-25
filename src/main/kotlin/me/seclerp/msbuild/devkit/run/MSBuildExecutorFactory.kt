@@ -1,4 +1,4 @@
-package me.seclerp.msbuild.devkit
+package me.seclerp.msbuild.devkit.run
 
 import com.intellij.execution.CantRunException
 import com.intellij.execution.configurations.RunProfileState
@@ -16,8 +16,9 @@ import com.jetbrains.rider.run.configurations.tryCreateReSharperHostSelfDebugSta
 import com.jetbrains.rider.run.environment.withDetectedExecutableType
 import com.jetbrains.rider.runtime.DotNetRuntime
 import com.jetbrains.rider.runtime.RiderDotNetActiveRuntimeHost
+import me.seclerp.msbuild.devkit.run.configurations.MSBuildConfigurationParameters
 
-class MSBuildExecutorFactory(private val project: Project, private val parameters: MSBuildConfigurationParameters) : AsyncExecutorFactory {
+class MSBuildExecutorFactory(private val parameters: MSBuildConfigurationParameters) : AsyncExecutorFactory {
     private val logger = getLogger<DotNetProjectExecutorFactory>()
 
     override suspend fun create(executorId: String, environment: ExecutionEnvironment, lifetime: Lifetime): RunProfileState {

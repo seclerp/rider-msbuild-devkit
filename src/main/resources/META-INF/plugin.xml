@@ -6,19 +6,14 @@
 
     <depends>com.intellij.modules.rider</depends>
 
-    <resource-bundle>messages.MyBundle</resource-bundle>
+    <resource-bundle>messages.MSBuildDevKitBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="me.seclerp.msbuild.devkit.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
         <configurationType
-                implementation="me.seclerp.msbuild.devkit.MSBuildConfigurationType"/>
+                implementation="me.seclerp.msbuild.devkit.run.configurations.MSBuildConfigurationType"/>
         <applicationService serviceInterface="com.intellij.execution.impl.NewRunConfigurationTreePopupFactory"
-                            serviceImplementation="me.seclerp.msbuild.devkit.PatchedRiderNewRunConfigurationTreePopupFactory"
+                            serviceImplementation="me.seclerp.msbuild.devkit.run.configurations.PatchedRiderNewRunConfigurationTreePopupFactory"
                             overrides="true"/>
-        <programRunner implementation="me.seclerp.msbuild.devkit.MSBuildDotNetProgramRunner" />
+        <programRunner implementation="me.seclerp.msbuild.devkit.run.MSBuildDotNetProgramRunner" />
     </extensions>
-
-    <applicationListeners>
-        <listener class="me.seclerp.msbuild.devkit.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
 </idea-plugin>
