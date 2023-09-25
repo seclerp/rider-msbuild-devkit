@@ -8,7 +8,7 @@
 
 ---
 
-<!-- Plugin description --> 
+<!-- Plugin description -->
 
 A plugin for Rider that enhances the MSBuild development experience
 
