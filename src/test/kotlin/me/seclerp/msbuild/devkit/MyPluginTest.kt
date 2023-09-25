@@ -1,7 +1,6 @@
 package me.seclerp.msbuild.devkit
 
 import com.intellij.openapi.actionSystem.ActionManager
-import com.intellij.openapi.components.service
 import com.jetbrains.rider.test.actions.TestRenameAction
 import com.jetbrains.rider.test.annotations.TestEnvironment
 import com.jetbrains.rider.test.base.TypingAssistTestBase
@@ -10,11 +9,9 @@ import com.jetbrains.rider.test.env.enums.SdkVersion
 import com.jetbrains.rider.test.scriptingApi.renameElement
 import com.jetbrains.rider.test.scriptingApi.typeWithLatency
 import com.jetbrains.rider.test.scriptingApi.withOpenedEditor
-import me.seclerp.msbuild.devkit.services.MyProjectService
 import org.testng.annotations.AfterTest
 import org.testng.annotations.BeforeTest
 import org.testng.annotations.Test
-import kotlin.test.assertNotEquals
 
 @TestEnvironment(sdkVersion = SdkVersion.AUTODETECT, buildTool = BuildTool.AUTODETECT)
 class MyPluginTest : TypingAssistTestBase() {
@@ -37,13 +34,6 @@ class MyPluginTest : TypingAssistTestBase() {
             renameElement()
             typeWithLatency("SpaceShipName")
         }
-    }
-
-    @Test
-    fun testProjectService() {
-        val projectService = project.service<MyProjectService>()
-
-        assertNotEquals(projectService.getRandomNumber(), projectService.getRandomNumber())
     }
 
     override fun getSolutionDirectoryName() = "MyProjectTestSln"
