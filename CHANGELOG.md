@@ -1,7 +1,9 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# msbuild-runner Changelog
+# Changelog
 
 ## [Unreleased]
 ### Added
-- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+- Run/Debug MSBuild tasks using new Run Configuration
+- "MSBuild Library" C# project template
+- "MSBuild Item" (`.props`/`.targets`) templates
