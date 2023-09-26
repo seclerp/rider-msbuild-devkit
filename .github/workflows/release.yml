@@ -3,6 +3,7 @@
 # See https://plugins.jetbrains.com/docs/intellij/plugin-signing.html for more information.
 
 name: Release
+permissions: write-all
 on:
   release:
     types: [prereleased, released]
