@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Support for Rider 2023.3
+
 ## [1.0.0] - 2023-09-26
 
 ### Added
