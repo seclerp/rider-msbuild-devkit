@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [1.0.1] - 2023-12-10
+
 ### Added
 
 - Support for Rider 2023.3
@@ -17,5 +19,6 @@
 
 - "MSBuild Item" (`.props`/`.targets`) templates
 
-[Unreleased]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/seclerp/rider-msbuild-devkit/commits/v1.0.0
