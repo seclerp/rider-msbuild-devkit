@@ -25,6 +25,7 @@ import me.seclerp.msbuild.devkit.MSBuildProjectInfo
 import me.seclerp.msbuild.devkit.components.*
 import me.seclerp.msbuild.devkit.editor.MSBuildTargetsCompletionProvider
 import javax.swing.JComponent
+import kotlin.jvm.internal.Intrinsics
 
 class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettingsEditor<MSBuildRunConfiguration>() {
     private val targetsToExecute = Property("")
@@ -39,7 +40,12 @@ class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettin
     private val panels = mutableSetOf<DialogPanel>()
 
     init {
-        val projects = WorkspaceModel.getInstance(project).findProjects().filter { it.isProject() }.map { it.toProjectInfo() }
+        val model = WorkspaceModel.getInstance(project);
+
+        val projects = listOfNotNull(model.getSolutionEntity())
+            .plus(model.findProjects().filter { it.isProject() })
+            .map { it.toProjectInfo() }
+
         runnableProjects.clear()
         runnableProjects.addAll(projects)
 
@@ -77,7 +83,7 @@ class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettin
                     .comment("When multiple targets should be executed, use Space as separator.")
                     .align(AlignX.FILL)
             }
-            row("Project") {
+            row("Project / Solution") {
                 projectSelector(project)
                     .bindItem(targetProject, lifetime)
                     .bindItems(runnableProjects, lifetime)
@@ -103,8 +109,15 @@ class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettin
     }
 
     private fun getProjectByPath(path: String): MSBuildProjectInfo? {
+        val model = WorkspaceModel.getInstance(project)
         val virtualFile = path.toVirtualFile(true) ?: return null
-        val proj = WorkspaceModel.getInstance(project).findProjectsByPath(virtualFile).firstOrNull { it.isProject() } ?: return null
+
+        val solutionEntity = model.getSolutionEntity()
+        if (Intrinsics.areEqual(virtualFile, solutionEntity?.url?.virtualFile)) {
+            return solutionEntity?.toProjectInfo();
+        }
+
+        val proj = model.findProjectsByPath(virtualFile).firstOrNull { it.isProject() } ?: return null
         return proj.toProjectInfo()
     }
 

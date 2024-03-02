@@ -29,6 +29,7 @@ import com.jetbrains.rd.util.reactive.IViewableList
 import com.jetbrains.rider.projectView.calculateIcon
 import com.jetbrains.rider.projectView.workspace.getProjectModelEntities
 import com.jetbrains.rider.projectView.workspace.isProject
+import com.jetbrains.rider.projectView.workspace.isSolution
 import com.jetbrains.rider.projectView.workspace.isUnloadedProject
 import com.jetbrains.rider.run.RiderRunBundle
 import com.jetbrains.rider.run.configurations.controls.runtimeSelection.RuntimeSelector
@@ -67,7 +68,7 @@ fun Row.projectSelector(project: Project): Cell<ComboBox<MSBuildProjectInfo>> {
                 }
                 VfsUtil.findFileByIoFile(File(value.filePath), false)?.let { virtualFile ->
                     WorkspaceModel.getInstance(project)
-                        .getProjectModelEntities(virtualFile, project).singleOrNull { it.isProject() || it.isUnloadedProject() }?.calculateIcon(
+                        .getProjectModelEntities(virtualFile, project).singleOrNull { it.isProject() || it.isUnloadedProject()|| it.isSolution() }?.calculateIcon(
                             project
                         )
                         ?.let { icon = it }
