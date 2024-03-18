@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [1.1.0] - 2024-03-18
+
 ### Added
 
 - An ability to select solution as anb MSBuild project to execute targets on (#30 by @BenjaminHutchinson)
@@ -23,6 +25,7 @@
 
 - "MSBuild Item" (`.props`/`.targets`) templates
 
-[Unreleased]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/seclerp/rider-msbuild-devkit/commits/v1.0.0
