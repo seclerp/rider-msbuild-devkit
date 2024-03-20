@@ -24,6 +24,7 @@ class MSBuildExecutorFactory(private val parameters: MSBuildConfigurationParamet
         val dotNetExecutable = parameters.toDotNetExecutable().withDetectedExecutableType()
         val project = environment.project
         val runtimeToExecute = DotNetRuntime.detectRuntimeForExeOrThrow(
+            project,
             RiderDotNetActiveRuntimeHost.getInstance(project),
             dotNetExecutable.exePath,
             dotNetExecutable.runtimeType,

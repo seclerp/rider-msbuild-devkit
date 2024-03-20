@@ -4,11 +4,9 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.platform.backend.workspace.WorkspaceModel
 import com.intellij.platform.backend.workspace.virtualFile
-import com.intellij.platform.workspace.storage.url.VirtualFileUrlManager
 import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.util.ui.EmptyIcon
-import com.intellij.workspaceModel.ide.getInstance
 import com.jetbrains.rd.platform.util.lifetime
 import com.jetbrains.rd.util.lifetime.Lifetime
 import com.jetbrains.rd.util.reactive.IProperty
@@ -123,6 +121,7 @@ class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettin
 
     private fun ProjectModelEntity.toProjectInfo(): MSBuildProjectInfo {
         val icon = calculateIcon(project) ?: EmptyIcon.ICON_16
-        return MSBuildProjectInfo(name, getFile()?.path ?: "", this.getContentRootUrl(VirtualFileUrlManager.getInstance(project))?.virtualFile?.path ?: "", icon)
+        val vfsManager = WorkspaceModel.getInstance(project).getVirtualFileUrlManager()
+        return MSBuildProjectInfo(name, getFile()?.path ?: "", getContentRootUrl(vfsManager)?.virtualFile?.path ?: "", icon)
     }
 }
