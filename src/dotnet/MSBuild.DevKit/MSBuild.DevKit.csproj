@@ -2,11 +2,14 @@
 
     <PropertyGroup>
         <OutputType>Library</OutputType>
-        <TargetFramework>net48</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.Build" />
+        <PackageReference Include="Microsoft.Build.Locator" />
+        <PackageReference Include="Microsoft.Build.Utilities.Core" />
         <PackageReference Include="Microsoft.NETCore.Platforms" />
         <PackageReference Include="Microsoft.NETCore.Targets" />
         <PackageReference Include="JetBrains.Platform.Core.Ide"/>

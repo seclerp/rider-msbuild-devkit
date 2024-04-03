@@ -15,5 +15,8 @@
                             serviceImplementation="me.seclerp.msbuild.devkit.run.configurations.PatchedRiderNewRunConfigurationTreePopupFactory"
                             overrides="true"/>
         <programRunner implementation="me.seclerp.msbuild.devkit.run.MSBuildDotNetProgramRunner" />
+        <toolWindow factoryClass="me.seclerp.msbuild.devkit.interactive.MSBuildConsoleToolWindowFactory" id="MsBuildConsoleToolWindow" />
+
+        <fileType name="MSBuild" implementationClass="me.seclerp.msbuild.devkit.psi.MSBuildFileType" />
     </extensions>
 </idea-plugin>
