@@ -55,7 +55,7 @@ jobs:
 
       # Setup .NET environment for backend plugin build
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           global-json-file: src/dotnet/global.json
 
@@ -125,7 +125,7 @@ jobs:
 
       # Setup .NET environment for backend plugin build
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           global-json-file: src/dotnet/global.json
 
@@ -190,7 +190,7 @@ jobs:
 
       # Setup .NET environment for backend plugin build
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           global-json-file: src/dotnet/global.json
 
