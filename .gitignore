@@ -1,7 +1,9 @@
+/.intellijPlatform/
 .gradle
 .idea
 .qodana
 build
+output
 
 # rd-gen output
 *.Generated.cs
