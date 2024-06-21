@@ -1,12 +1,21 @@
+rootProject.name = "msbuild-devkit"
+
+include(":protocol")
+
 pluginManagement {
     repositories {
-        maven("https://packages.jetbrains.team/maven/p/ij/intellij-dependencies")
-        maven("https://cache-redirector.jetbrains.com/plugins.gradle.org")
-        maven("https://oss.sonatype.org/content/repositories/snapshots/")
         gradlePluginPortal()
+        mavenCentral()
+    }
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "com.jetbrains.rdgen") {
+                useModule("com.jetbrains.rd:rd-gen:${requested.version}")
+            }
+        }
     }
 }
 
-rootProject.name = "msbuild-devkit"
-
-include("protocol")
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
+}

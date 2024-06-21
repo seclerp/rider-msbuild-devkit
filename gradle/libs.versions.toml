@@ -5,16 +5,20 @@ annotations = "24.0.1"
 # plugins
 kotlin = "1.9.23"
 changelog = "2.2.0"
-gradleIntelliJPlugin = "1.17.3"
+gradleIntelliJPlatform = "2.0.0-beta7"
 qodana = "0.1.13"
 kover = "0.7.3"
+rdGen = "2024.1.1"
 
 [libraries]
+kotlinStdLib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 annotations = { group = "org.jetbrains", name = "annotations", version.ref = "annotations" }
+openTest4J = "org.opentest4j:opentest4j:1.3.0"
+rdGen = { group = "com.jetbrains.rd", name = "rd-gen", version.ref = "rdGen" }
 
 [plugins]
 changelog = { id = "org.jetbrains.changelog", version.ref = "changelog" }
-gradleIntelliJPlugin = { id = "org.jetbrains.intellij", version.ref = "gradleIntelliJPlugin" }
+gradleIntelliJPlatform = { id = "org.jetbrains.intellij.platform", version.ref = "gradleIntelliJPlatform" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 qodana = { id = "org.jetbrains.qodana", version.ref = "qodana" }

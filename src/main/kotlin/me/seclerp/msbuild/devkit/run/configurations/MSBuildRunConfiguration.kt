@@ -8,7 +8,7 @@ import com.intellij.openapi.project.Project
 import com.jetbrains.rider.debugger.IRiderDebuggable
 import com.jetbrains.rider.run.ICanRunFromBackend
 import com.jetbrains.rider.run.configurations.*
-import com.jetbrains.rider.run.postStartupActivities.IPostStartupActivity
+import com.jetbrains.rider.run.startupActivities.IPostStartupActivity
 import com.jetbrains.rider.runtime.RiderDotNetActiveRuntimeHost
 import me.seclerp.msbuild.devkit.run.MSBuildExecutorFactory
 import org.jdom.Element
