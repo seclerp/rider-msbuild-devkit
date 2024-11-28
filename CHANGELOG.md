@@ -18,7 +18,7 @@
 
 ### Added
 
-- An ability to select solution as anb MSBuild project to execute targets on (#30 by @BenjaminHutchinson)
+- An ability to select solution as an MSBuild project to execute targets on (#30 by @BenjaminHutchinson)
 
 ## [1.0.1] - 2023-12-10
 
