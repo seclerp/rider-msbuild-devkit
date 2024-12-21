@@ -6,7 +6,7 @@
 
 ### Added
 
-- Support for Rider 2024.2 (EAP 3)
+- Support for Rider 2024.3.2
 
 ## [1.1.1] - 2024-04-06
 
