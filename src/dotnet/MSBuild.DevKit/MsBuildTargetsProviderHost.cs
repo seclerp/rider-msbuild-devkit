@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JetBrains.Application.Components;
+using JetBrains.Application.Parts;
 using JetBrains.Lifetimes;
 using JetBrains.Platform.MsBuildHost.ProjectModel;
 using JetBrains.ProjectModel;
@@ -16,7 +17,7 @@ using MSBuild.DevKit.Rd;
 
 namespace MSBuild.DevKit;
 
-[SolutionComponent]
+[SolutionComponent(Instantiation.ContainerAsyncPrimaryThread)]
 public class MsBuildTargetsProviderHost
 {
     private readonly ISolution _solution;
@@ -34,7 +35,6 @@ public class MsBuildTargetsProviderHost
     {
         using (ReadLockCookie.Create())
         {
-            // while (!Debugger.IsAttached) { Thread.Sleep(100); }
             var project = _solution.GetProjectByGuid(projectInfo.Id);
 
             var projectMark = project?.GetProjectMark();

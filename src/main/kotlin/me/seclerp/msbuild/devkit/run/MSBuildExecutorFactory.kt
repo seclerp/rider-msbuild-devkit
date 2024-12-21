@@ -34,7 +34,7 @@ class MSBuildExecutorFactory(private val parameters: MSBuildConfigurationParamet
         return when (executorId) {
             DefaultRunExecutor.EXECUTOR_ID -> runtimeToExecute.createRunState(dotNetExecutable, environment)
             DefaultDebugExecutor.EXECUTOR_ID -> {
-                tryCreateReSharperHostSelfDebugState(environment, parameters, runtimeToExecute, dotNetExecutable)
+                tryCreateReSharperHostSelfDebugState(environment, dotNetExecutable, runtimeToExecute)
                     ?: runtimeToExecute.createDebugState(dotNetExecutable, environment)
             }
             else -> {
