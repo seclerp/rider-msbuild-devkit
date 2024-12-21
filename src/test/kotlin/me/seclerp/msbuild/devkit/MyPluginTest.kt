@@ -36,5 +36,5 @@ class MyPluginTest : TypingAssistTestBase() {
         }
     }
 
-    override fun getSolutionDirectoryName() = "MyProjectTestSln"
+    override val testSolution = "MyProjectTestSln"
 }

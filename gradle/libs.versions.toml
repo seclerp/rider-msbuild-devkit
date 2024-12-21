@@ -5,10 +5,10 @@ annotations = "24.0.1"
 # plugins
 kotlin = "1.9.23"
 changelog = "2.2.0"
-gradleIntelliJPlatform = "2.0.0-beta7"
+gradleIntelliJPlatform = "2.1.0"
 qodana = "0.1.13"
 kover = "0.7.3"
-rdGen = "2024.1.1"
+rdGen = "2024.3.1"
 
 [libraries]
 kotlinStdLib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
