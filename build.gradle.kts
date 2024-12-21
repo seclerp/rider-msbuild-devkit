@@ -82,7 +82,7 @@ kotlin {
 // Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
 changelog {
     groups.empty()
-    repositoryUrl = properties("pluginRepositoryUrl")
+    repositoryUrl = properties("pluginRepositoryUrl").get()
 }
 
 // Configure Gradle Qodana Plugin - read more: https://github.com/JetBrains/gradle-qodana-plugin
@@ -265,10 +265,10 @@ tasks {
     }
 
     patchPluginXml {
-        pluginId = properties("pluginId")
-        version = properties("pluginVersion")
-        sinceBuild = properties("pluginSinceBuild")
-        untilBuild = properties("pluginUntilBuild")
+        pluginId = properties("pluginId").get()
+        version = properties("pluginVersion").get()
+        sinceBuild = properties("pluginSinceBuild").get()
+        untilBuild = properties("pluginUntilBuild").get()
 
         // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
         pluginDescription = providers.fileContents(layout.projectDirectory.file("README.md")).asText.map {
