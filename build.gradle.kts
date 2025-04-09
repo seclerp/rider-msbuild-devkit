@@ -4,6 +4,7 @@ import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.intellij.platform.gradle.Constants
+import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 import kotlin.io.path.isDirectory
 import kotlin.io.path.name
 import kotlin.io.path.readText
@@ -69,7 +70,7 @@ dependencies {
         rider(platformVersion, useInstaller = false)
         bundledModule("intellij.rider")
         instrumentationTools()
-        bundledLibrary("lib/testFramework.jar")
+        testFramework(TestFrameworkType.Bundled)
     }
     testImplementation(libs.openTest4J)
 }
@@ -77,6 +78,7 @@ dependencies {
 // Set the JVM language level used to build the project. Use Java 11 for 2020.3+, and Java 17 for 2022.2+.
 kotlin {
     jvmToolchain(21)
+    compilerOptions.freeCompilerArgs.add("-Xcontext-receivers")
 }
 
 // Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
