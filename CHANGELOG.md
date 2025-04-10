@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [1.2.2] - 2025-04-10
+
 ### Added
 
 - Support for Rider 2025.1 RC 1
@@ -47,7 +49,8 @@
 
 - "MSBuild Item" (`.props`/`.targets`) templates
 
-[Unreleased]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.2.1...HEAD
+[Unreleased]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.2.2...HEAD
+[1.2.2]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.1.0...v1.1.1
