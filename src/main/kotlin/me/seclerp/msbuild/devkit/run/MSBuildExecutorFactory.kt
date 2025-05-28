@@ -10,6 +10,7 @@ import com.jetbrains.rd.util.lifetime.Lifetime
 import com.jetbrains.rider.run.RiderRunBundle
 import com.jetbrains.rider.run.configurations.AsyncExecutorFactory
 import com.jetbrains.rider.run.configurations.dotNetExe.DotNetExeConfigurationExtension
+import com.jetbrains.rider.run.configurations.exe.ProcessExecutionDetails
 import com.jetbrains.rider.run.configurations.project.DotNetProjectExecutorFactory
 import com.jetbrains.rider.run.configurations.tryCreateReSharperHostSelfDebugState
 import com.jetbrains.rider.run.environment.withDetectedExecutableType
@@ -21,7 +22,7 @@ class MSBuildExecutorFactory(private val parameters: MSBuildConfigurationParamet
     private val logger = getLogger<DotNetProjectExecutorFactory>()
 
     override suspend fun create(executorId: String, environment: ExecutionEnvironment, lifetime: Lifetime): RunProfileState {
-        val dotNetExecutable = parameters.toDotNetExecutable().withDetectedExecutableType()
+        val dotNetExecutable = parameters.toDotNetExecutableSuspending(ProcessExecutionDetails.Default).withDetectedExecutableType()
         val project = environment.project
         val runtimeToExecute = DotNetRuntime.detectRuntimeForExeOrThrow(
             project,

@@ -4,6 +4,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.JDOMExternalizerUtil
 import com.jetbrains.rider.run.configurations.RunConfigurationHelper
 import com.jetbrains.rider.run.configurations.dotNetExe.DotNetExeConfigurationParameters
+import com.jetbrains.rider.run.configurations.exe.ProcessExecutionDetails
 import com.jetbrains.rider.runtime.DotNetExecutable
 import com.jetbrains.rider.runtime.DotNetRuntimeType
 import org.jdom.Element
@@ -39,8 +40,8 @@ class MSBuildConfigurationParameters(
         private const val PROJECT_FILE_PATH = "PROJECT_FILE_PATH"
     }
 
-    override fun toDotNetExecutable(): DotNetExecutable {
-        val base = super.toDotNetExecutable()
+    override suspend fun toDotNetExecutableSuspending(details: ProcessExecutionDetails): DotNetExecutable {
+        val base = super.toDotNetExecutableSuspending(details)
         // TODO: Generate MSBuild executable
         val parameters = buildList {
             add(projectFilePath)
