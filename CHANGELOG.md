@@ -4,6 +4,14 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Remove upper bound for release version requirement, introduce forward compatibility starting with Rider 2025.1 
+
+### Fixed
+
+- Fix runtime assertions related to default settings configuration
+
 ## [1.2.4] - 2025-05-28
 
 ### Added
