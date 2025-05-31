@@ -1,14 +1,14 @@
 using System.IO;
 using System.Reflection;
-using JetBrains.Application;
 using JetBrains.Application.Settings;
 using JetBrains.Lifetimes;
+using JetBrains.ReSharper.Feature.Services.LiveTemplates.Settings;
 using JetBrains.ReSharper.Feature.Services.LiveTemplates.Templates;
 using JetBrains.ReSharper.LiveTemplates.Resources;
 
 namespace MSBuild.DevKit;
 
-[ShellComponent]
+[DefaultSettings(typeof(LiveTemplatesSettings))]
 public class MsBuildDefaultSettingsStream : IHaveDefaultSettingsStream
 {
     public MsBuildDefaultSettingsStream()
