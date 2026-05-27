@@ -195,22 +195,22 @@ tasks {
     val dotnetCompile by registering {
         dependsOn(prepare)
         doLast {
-            exec {
+            providers.exec {
                 workingDir(dotnetSrcDir)
                 executable("dotnet")
                 args("build", "-c", dotnetBuildConfiguration)
-            }
+            }.result.get()
         }
     }
 
     register("checkDotnet") {
         dependsOn(dotnetCompile)
         doLast {
-            exec {
+            providers.exec {
                 workingDir(dotnetSrcDir.absolutePath)
                 executable("dotnet")
                 args("test", "-c", dotnetBuildConfiguration)
-            }
+            }.result.get()
         }
     }
 
@@ -246,7 +246,7 @@ tasks {
         dependsOn(dotnetCompile)
 
         copy {
-            from("${buildDir}/distributions/${rootProject.name}-${version}.zip")
+            from("${layout.buildDirectory.get().asFile}/distributions/${rootProject.name}-${version}.zip")
             into("${rootDir}/output")
         }
     }
