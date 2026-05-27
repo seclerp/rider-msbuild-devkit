@@ -8,6 +8,11 @@
 
 ---
 
+> [!WARNING]
+> This project is no longer actively maintained. Only security and compatibility updates are expected going forward.
+> 
+> However, contributions are still welcome! Feel free to open [a PR](https://github.com/seclerp/rider-msbuild-devkit/pulls) or file [an issue](https://github.com/seclerp/rider-msbuild-devkit/issues/new).
+
 <!-- Plugin description -->
 
 A plugin for Rider that enhances the MSBuild development experience
