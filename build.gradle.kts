@@ -67,7 +67,9 @@ repositories {
 // Dependencies are managed with Gradle version catalog - read more: https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
 dependencies {
     intellijPlatform {
-        rider(platformVersion, useInstaller = false)
+        rider(platformVersion) {
+            useInstaller = false
+        }
         bundledModule("intellij.rider")
         instrumentationTools()
         testFramework(TestFrameworkType.Bundled)
