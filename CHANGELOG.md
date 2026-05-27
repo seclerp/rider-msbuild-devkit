@@ -77,15 +77,15 @@
 
 - "MSBuild Item" (`.props`/`.targets`) templates
 
-[Unreleased]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.2.6...HEAD
-[1.2.6]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.2.5...v1.2.6
-[1.2.5]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.2.4...v1.2.5
-[1.2.4]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.2.3...v1.2.4
-[1.2.3]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.2.2...v1.2.3
-[1.2.2]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.2.1...v1.2.2
-[1.2.1]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.2.0...v1.2.1
-[1.2.0]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.1.1...v1.2.0
-[1.1.1]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.1.0...v1.1.1
-[1.1.0]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.0.1...v1.1.0
-[1.0.1]: https://github.com/seclerp/rider-msbuild-devkit/compare/v1.0.0...v1.0.1
-[1.0.0]: https://github.com/seclerp/rider-msbuild-devkit/commits/v1.0.0
+[Unreleased]: https://github.com/seclerp/rider-msbuild-devkit/compare/1.2.6...HEAD
+[1.2.6]: https://github.com/seclerp/rider-msbuild-devkit/compare/1.2.5...1.2.6
+[1.2.5]: https://github.com/seclerp/rider-msbuild-devkit/compare/1.2.4...1.2.5
+[1.2.4]: https://github.com/seclerp/rider-msbuild-devkit/compare/1.2.3...1.2.4
+[1.2.3]: https://github.com/seclerp/rider-msbuild-devkit/compare/1.2.2...1.2.3
+[1.2.2]: https://github.com/seclerp/rider-msbuild-devkit/compare/1.2.1...1.2.2
+[1.2.1]: https://github.com/seclerp/rider-msbuild-devkit/compare/1.2.0...1.2.1
+[1.2.0]: https://github.com/seclerp/rider-msbuild-devkit/compare/1.1.1...1.2.0
+[1.1.1]: https://github.com/seclerp/rider-msbuild-devkit/compare/1.1.0...1.1.1
+[1.1.0]: https://github.com/seclerp/rider-msbuild-devkit/compare/1.0.1...1.1.0
+[1.0.1]: https://github.com/seclerp/rider-msbuild-devkit/compare/1.0.0...1.0.1
+[1.0.0]: https://github.com/seclerp/rider-msbuild-devkit/commits/1.0.0
