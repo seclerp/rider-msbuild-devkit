@@ -31,8 +31,6 @@ class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettin
     private val programArguments = Property("")
     private val envs: IProperty<Map<String, String>> = Property(hashMapOf())
     private val runtimeSelector = RuntimeSelector(RiderRunBundle.message("label.runtime"), "Runtime", project, project.lifetime)
-
-    private val msbuildPath by lazy { project.solution.activeMsBuildPath.value }
     private val targetsCompletionProvider = MSBuildTargetsCompletionProvider(project)
     private val runnableProjects = ViewableList<MSBuildProjectInfo>()
     private val panels = mutableSetOf<DialogPanel>()
@@ -61,9 +59,9 @@ class MSBuildConfigurationEditor(private val project: Project) : LifetimedSettin
     override fun applyEditorTo(configuration: MSBuildRunConfiguration) {
         panels.forEach { it.apply() }
         configuration.parameters.apply {
-            exePath = msbuildPath ?: ""
+            exePath = project.solution.activeMsBuildPath.value?.value ?: ""
             workingDirectory = targetProject.value?.directory ?: ""
-            assemblyToDebug = project.solution.activeMsBuildPath.value ?: ""
+            assemblyToDebug = project.solution.activeMsBuildPath.value?.value ?: ""
             envs = this@MSBuildConfigurationEditor.envs.value
             programParameters = programArguments.value
             runtimeType = runtimeSelector.runtime.value

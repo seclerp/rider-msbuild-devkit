@@ -14,7 +14,7 @@ class MSBuildConfigurationFactory(type: ConfigurationType) : ConfigurationFactor
     override fun createTemplateConfiguration(project: Project): RunConfiguration {
         return MSBuildRunConfiguration("MSBuild", project, this, MSBuildConfigurationParameters(
             project = project,
-            exePath = project.solution.activeMsBuildPath.value ?: "",
+            exePath = project.solution.activeMsBuildPath.value?.value ?: "",
             programParameters = "",
             workingDirectory = "",
             envs = hashMapOf(),

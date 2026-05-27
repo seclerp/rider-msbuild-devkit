@@ -71,7 +71,7 @@ dependencies {
             useInstaller = false
         }
         bundledModule("intellij.rider")
-        instrumentationTools()
+        bundledModule("intellij.rider.debugger.shared")
         testFramework(TestFrameworkType.Bundled)
     }
     testImplementation(libs.openTest4J)
