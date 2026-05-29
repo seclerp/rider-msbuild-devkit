@@ -52,9 +52,24 @@ class MSBuildConfigurationParameters(
             add(base.programParameterString)
         }.joinToString(" ")
 
-        return base.copy(
+        // The ctor is used instead of .copy here to prevent binary incompatibility with further versions if Rider.
+        // This constructor is deprecated in 2026.2+, but still available.
+        return DotNetExecutable(
+            exePath = base.exePath,
+            projectTfm = base.projectTfm,
+            workingDirectory = workingDirectory,
             programParameterString = parameters,
-            executeAsIs = false
+            terminalMode = terminalMode,
+            environmentVariables = base.environmentVariables,
+            isPassParentEnvs = base.isPassParentEnvs,
+            onBeforeProcessStarted = base.onBeforeProcessStarted,
+            assemblyToDebug = base.assemblyToDebug,
+            runtimeArguments = base.runtimeArguments,
+            executeAsIs = false,
+            runtimeType = base.runtimeType,
+            executableType = base.executableType,
+            mixedModeDebugging = base.mixedModeDebugging,
+            autoAttachToChildren = base.autoAttachToChildren
         )
     }
 

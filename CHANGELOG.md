@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- Fix binary incompatibility with Rider 2026.2+
+
 ## [1.2.6] - 2026-05-27
 
 ### Added
