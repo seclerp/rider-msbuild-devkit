@@ -1,10 +1,13 @@
 import com.jetbrains.plugin.structure.base.utils.isFile
 import com.jetbrains.plugin.structure.base.utils.listFiles
 import org.jetbrains.changelog.Changelog
+import org.jetbrains.changelog.exceptions.MissingVersionException
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.intellij.platform.gradle.Constants
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
+import org.jetbrains.intellij.platform.gradle.models.ProductRelease
+import org.jetbrains.intellij.platform.gradle.tasks.VerifyPluginTask
 import kotlin.io.path.isDirectory
 import kotlin.io.path.name
 import kotlin.io.path.readText
@@ -42,6 +45,40 @@ val dotnetBuildConfiguration = ext.properties["dotnetBuildConfiguration"] ?: "De
 
 intellijPlatform {
     buildSearchableOptions = dotnetBuildConfiguration == "Release"
+
+    pluginConfiguration {
+        val latestChangelog = try {
+            changelog.getUnreleased()
+        } catch (_: MissingVersionException) {
+            changelog.getLatest()
+        }
+        changeNotes = provider {
+            changelog.renderItem(
+                latestChangelog
+                    .withHeader(false)
+                    .withEmptySections(false),
+                Changelog.OutputType.HTML
+            )
+        }
+    }
+
+    pluginVerification {
+        ides {
+            select {
+                channels = listOf(
+                    ProductRelease.Channel.RELEASE,
+                    ProductRelease.Channel.EAP
+                )
+                untilBuild = providers.gradleProperty("untilBuildForVerification")
+            }
+        }
+        failureLevel.addAll(
+            VerifyPluginTask.FailureLevel.COMPATIBILITY_WARNINGS,
+            VerifyPluginTask.FailureLevel.DEPRECATED_API_USAGES,
+            VerifyPluginTask.FailureLevel.INTERNAL_API_USAGES,
+            VerifyPluginTask.FailureLevel.OVERRIDE_ONLY_API_USAGES
+        )
+    }
 }
 
 // Granular Rider SDK configuration
