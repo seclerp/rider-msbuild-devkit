@@ -6,8 +6,6 @@ annotations = "26.0.2"
 kotlin = "2.3.10"
 changelog = "2.2.1"
 gradleIntelliJPlatform = "2.16.0"
-qodana = "0.1.13"
-kover = "0.7.3"
 rdGen = "2026.2.1"
 
 [libraries]
@@ -20,5 +18,3 @@ rdGen = { group = "com.jetbrains.rd", name = "rd-gen", version.ref = "rdGen" }
 changelog = { id = "org.jetbrains.changelog", version.ref = "changelog" }
 gradleIntelliJPlatform = { id = "org.jetbrains.intellij.platform", version.ref = "gradleIntelliJPlatform" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
-qodana = { id = "org.jetbrains.qodana", version.ref = "qodana" }
