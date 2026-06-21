@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [1.2.7] - 2026-05-29
+
 ### Fixed
 
 - Fix binary incompatibility with Rider 2026.2+
@@ -81,7 +83,8 @@
 
 - "MSBuild Item" (`.props`/`.targets`) templates
 
-[Unreleased]: https://github.com/seclerp/rider-msbuild-devkit/compare/1.2.6...HEAD
+[Unreleased]: https://github.com/seclerp/rider-msbuild-devkit/compare/1.2.7...HEAD
+[1.2.7]: https://github.com/seclerp/rider-msbuild-devkit/compare/1.2.6...1.2.7
 [1.2.6]: https://github.com/seclerp/rider-msbuild-devkit/compare/1.2.5...1.2.6
 [1.2.5]: https://github.com/seclerp/rider-msbuild-devkit/compare/1.2.4...1.2.5
 [1.2.4]: https://github.com/seclerp/rider-msbuild-devkit/compare/1.2.3...1.2.4
