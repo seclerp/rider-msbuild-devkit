@@ -4,7 +4,7 @@ annotations = "26.0.2"
 
 # plugins
 kotlin = "2.3.10"
-changelog = "2.2.1"
+changelog = "2.5.0"
 gradleIntelliJPlatform = "2.16.0"
 rdGen = "2026.2.1"
 
